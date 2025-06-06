@@ -310,7 +310,7 @@ def convert_file(path, dst_path=None, interact=True, overwrite=False):
             raise OSError("Output exists and overwriting is disabled!")
 
     # handle actual file
-    writer = gguf.GGUFWriter(path=None, arch=model_arch.arch)
+    writer = gguf.GGUFWriter(path=None, arch=model_arch.arch, use_temp_file=True) # SBM Efficiency.
     writer.add_quantization_version(gguf.GGML_QUANT_VERSION)
     if ftype_gguf is not None:
         writer.add_file_type(ftype_gguf)

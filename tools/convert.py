@@ -315,10 +315,15 @@ def convert_file(path, dst_path=None, interact=True, overwrite=False):
     if ftype_gguf is not None:
         writer.add_file_type(ftype_gguf)
 
+    print("Handling tensors") # SBM
     handle_tensors(writer, state_dict, model_arch)
+    print("SBM Writing to file") # SBM
     writer.write_header_to_file(path=dst_path)
+    print("SBM Writing kv") # SBM
     writer.write_kv_data_to_file()
+    print("SBM Writing tensors") # SBM
     writer.write_tensors_to_file(progress=True)
+    print("SBM Done write") # SBM
     writer.close()
 
     fix = f"./fix_5d_tensors_{model_arch.arch}.safetensors"
@@ -331,3 +336,4 @@ def convert_file(path, dst_path=None, interact=True, overwrite=False):
 if __name__ == "__main__":
     args = parse_args()
     convert_file(args.src, args.dst)
+    print("SBM DONE") # SBM

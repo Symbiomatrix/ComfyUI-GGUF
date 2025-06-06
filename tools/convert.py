@@ -274,8 +274,8 @@ def handle_tensors(writer, state_dict, model_arch):
 
         writer.add_tensor(new_name, data, raw_dtype=data_qtype)
         # SBM Hopefully clears out redundant memory.
-        del data
-        gc.collect()
+        # del data
+        # gc.collect()
 
 def convert_file(path, dst_path=None, interact=True, overwrite=False):
     # load & run model detection logic

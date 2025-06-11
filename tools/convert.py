@@ -317,9 +317,9 @@ def convert_file(path, dst_path=None, interact=True, overwrite=False, retwriter 
         writer.add_file_type(ftype_gguf)
 
     # Need to remove the source file for extra space. Desperate measures.
-    if os.path.isfile(path):
-        os.remove(path)
-        time.sleep(30)
+    # if os.path.isfile(path):
+    #     os.remove(path)
+    #     time.sleep(30)
     print("Handling tensors") # SBM
     handle_tensors(writer, state_dict, model_arch)
     print("SBM Writing to file") # SBM

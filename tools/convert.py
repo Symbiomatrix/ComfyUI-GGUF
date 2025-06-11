@@ -278,7 +278,7 @@ def handle_tensors(writer, state_dict, model_arch):
         # del data
         # gc.collect()
 
-def convert_file(path, dst_path=None, interact=True, overwrite=False):
+def convert_file(path, dst_path=None, interact=True, overwrite=False, retwriter = False):
     # load & run model detection logic
     state_dict = load_state_dict(path)
     model_arch = detect_arch(state_dict)
@@ -324,6 +324,8 @@ def convert_file(path, dst_path=None, interact=True, overwrite=False):
     handle_tensors(writer, state_dict, model_arch)
     print("SBM Writing to file") # SBM
     writer.write_header_to_file(path=dst_path)
+    if retwriter: # Even more desperate - return the writer before the main writing.
+        return writer
     print("SBM Writing kv") # SBM
     writer.write_kv_data_to_file()
     print("SBM Writing tensors") # SBM

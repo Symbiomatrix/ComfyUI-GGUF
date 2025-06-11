@@ -6,6 +6,7 @@ import logging
 import argparse
 from tqdm import tqdm
 from safetensors.torch import load_file, save_file
+import time
 
 QUANTIZATION_THRESHOLD = 1024
 REARRANGE_THRESHOLD = 512
@@ -318,6 +319,7 @@ def convert_file(path, dst_path=None, interact=True, overwrite=False):
     # Need to remove the source file for extra space. Desperate measures.
     if os.path.isfile(path):
         os.remove(path)
+        time.sleep(30)
     print("Handling tensors") # SBM
     handle_tensors(writer, state_dict, model_arch)
     print("SBM Writing to file") # SBM

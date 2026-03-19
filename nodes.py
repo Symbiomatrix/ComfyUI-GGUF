@@ -135,10 +135,9 @@ class GGUFModelPatcher(comfy.model_patcher.ModelPatcher):
 class UnetLoaderGGUF:
     @classmethod
     def INPUT_TYPES(s):
-        unet_names = [x for x in folder_paths.get_filename_list("unet_gguf")]
         return {
             "required": {
-                "unet_name": (unet_names,),
+                "unet_name": (folder_paths.get_filename_list("unet_gguf"),),
             }
         }
 
@@ -186,10 +185,9 @@ class UnetLoaderGGUF:
 class UnetLoaderGGUFAdvanced(UnetLoaderGGUF):
     @classmethod
     def INPUT_TYPES(s):
-        unet_names = [x for x in folder_paths.get_filename_list("unet_gguf")]
         return {
             "required": {
-                "unet_name": (unet_names,),
+                "unet_name": (folder_paths.get_filename_list("unet_gguf"),),
                 "dequant_dtype": (["default", "target", "float32", "float16", "bfloat16"], {"default": "default"}),
                 "patch_dtype": (["default", "target", "float32", "float16", "bfloat16"], {"default": "default"}),
                 "patch_on_device": ("BOOLEAN", {"default": False}),
